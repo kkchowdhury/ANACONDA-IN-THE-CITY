@@ -32,6 +32,9 @@
         defaultPrivacyLevel: 'mask-user-input'
       });
       
+      window.DD_RUM.setUser({
+      id: userId // Replace '1234' with your user's unique identifier
+    });
       function generateUniqueUserId() {
         return 'user_' + Math.random().toString(36).substr(2, 9);
       }
