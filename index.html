@@ -1,55 +1,60 @@
+<!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="style.css">
-<link rel="icon"  href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico">
   <script>
-  (function(h,o,u,n,d) {
-    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
-    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM')
-  window.DD_RUM.onReady(function() {
-    window.DD_RUM.init({
-      clientToken: 'pub9ca546d2660554ba3b38507982027d56',
-      applicationId: 'e09756d7-de01-4736-ab21-4ad1f09ae15f',
-      site: 'us5.datadoghq.com',
-      service: 'snake-game',
-      env: '<ENV_NAME>',
-      // Specify a version number to identify the deployed version of your application in Datadog
-      // version: '1.0.0', 
-      sessionSampleRate: 100,
-      sessionReplaySampleRate: 20,
-      trackUserInteractions: true,
-      trackResources: true,
-      trackLongTasks: true,
-      defaultPrivacyLevel: 'mask-user-input',
+    (function(h,o,u,n,d) {
+      h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+      d=o.createElement(u);d.async=1;d.src=n
+      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+    })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM');
+    
+    window.DD_RUM.onReady(function() {
+      var userId = localStorage.getItem('userId');
+      if (!userId) {
+        userId = generateUniqueUserId(); 
+        localStorage.setItem('userId', userId);
+      }
+      window.DD_RUM.init({
+        clientToken: 'pub9ca546d2660554ba3b38507982027d56',
+        applicationId: 'e09756d7-de01-4736-ab21-4ad1f09ae15f',
+        site: 'us5.datadoghq.com',
+        service: 'snake-game',
+        env: '<ENV_NAME>',
+        // Specify a version number to identify the deployed version of your application in Datadog
+        // version: '1.0.0', 
+        sessionSampleRate: 100,
+        sessionReplaySampleRate: 20,
+        trackUserInteractions: true,
+        trackResources: true,
+        trackLongTasks: true,
+        defaultPrivacyLevel: 'mask-user-input'
+      });
+      
+      function generateUniqueUserId() {
+        return 'user_' + Math.random().toString(36).substr(2, 9);
+      }
     });
-  })
-</script>
+  </script>
 </head>
 <body>
-<div class="container noselect">
-  <div class="wrapper">
-    <button id="replay">
-      <i class="fas fa-play"></i>
-      RESTART
-    </button>
-    <div id="canvas">
-
+  <div class="container noselect">
+    <div class="wrapper">
+      <button id="replay">
+        <i class="fas fa-play"></i>
+        RESTART
+      </button>
+      <div id="canvas"></div>
+      <div id="ui">
+        <h2>SCORE</h2>
+        <span id="score">00</span>
+      </div>
     </div>
-    <div id="ui">
-      <h2>SCORE
-      </h2>
-      <span id="score">00</span>
+    <div id="author">
+      <span><h1>ANACONDA IN THE CITY</h1> by Kishaloy Kar Chowdhury</span>
     </div>
   </div>
-  <div id="author">
-    <span><h1> ANACONDA IN THE CITY </h1>   by Kishaloy Kar Chowdhury </span>
-  </div>
-</div>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
-
-
