@@ -28,4 +28,4 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-      run: terraform -chdir=infra apply -auto-approve -var "github_token=${{ secrets.GITHUB_TOKEN }}"
+      run: terraform -chdir=anaconda apply -auto-approve -var "github_token=${{ secrets.MY_GITHUB_TOKEN }}"
